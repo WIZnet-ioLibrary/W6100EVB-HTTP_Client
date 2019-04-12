@@ -41,8 +41,8 @@ This project requires an environment that runs DHCP and DNS.
   <p align="center">
     <img width="60%" src="https://user-images.githubusercontent.com/34225062/56016137-45ab9280-5d36-11e9-9142-68a57b3f6b9a.png" />    
   </p>
-  <p align="center">
   - If you want to work over IP version 6, set the ip_ver value from AS_IPV4 to AS_IPV6.
+  <p align="center">  
     <img width="30%" src="https://user-images.githubusercontent.com/34225062/56016283-b0f56480-5d36-11e9-95f2-134cfa103c80.png" />       
   </p>
 
