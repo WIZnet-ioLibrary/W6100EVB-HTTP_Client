@@ -42,7 +42,7 @@ This project requires an environment that runs DHCP and DNS.
     <img width="60%" src="https://user-images.githubusercontent.com/34225062/56016137-45ab9280-5d36-11e9-9142-68a57b3f6b9a.png" />    
   </p>
   
-  - If you want to work over IP version 6, set the ip_ver value from AS_IPV4 to AS_IPV6.
+  - If you want to work over IP version 6, set the ip_ver value which is in main.c from AS_IPV4 to AS_IPV6.
   <p align="center">  
     <img width="30%" src="https://user-images.githubusercontent.com/34225062/56016283-b0f56480-5d36-11e9-95f2-134cfa103c80.png" />       
   </p>
@@ -50,14 +50,9 @@ This project requires an environment that runs DHCP and DNS.
   ## Code review
   * main.c code flow <br>
   <p align="center">
-    <img width="50%" src="https://user-images.githubusercontent.com/9648281/55851411-67204900-5b93-11e9-988c-4d1b3d38d744.jpg" />
+    <img width="50%" src="https://user-images.githubusercontent.com/34225062/56019764-74c70180-5d40-11e9-9e36-8867417a16c7.jpg" />
   </p>
 
    ## Test packet capture file
-     <p align="center">
-    <img width="100%" src="https://user-images.githubusercontent.com/9648281/55846455-bd37c100-5b80-11e9-91bd-4516bc67eac2.JPG" />
-  </p>
-
-    
     -Test packet capture file :  [HTTP_Client_Packet.zip](https://github.com/WIZnet-ioLibrary/W6100EVB-HTTP_Client/files/3071859/http_client_packet.zip)
 
