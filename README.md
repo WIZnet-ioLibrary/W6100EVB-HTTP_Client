@@ -50,7 +50,7 @@ This project requires an environment that runs DHCP and DNS.
   ## Code review
   * main.c code flow <br>
   <p align="center">
-    <img width="50%" src="https://user-images.githubusercontent.com/34225062/56019764-74c70180-5d40-11e9-9e36-8867417a16c7.jpg" />
+    <img width="40%" src="https://user-images.githubusercontent.com/34225062/56019764-74c70180-5d40-11e9-9e36-8867417a16c7.jpg" />
   </p>
 
    ## Test packet capture file
