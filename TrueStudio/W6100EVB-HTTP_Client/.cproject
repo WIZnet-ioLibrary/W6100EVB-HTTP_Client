@@ -19,7 +19,7 @@
 							<option id="com.atollic.truestudio.toolchain_options.mcu.1104789566" name="Microcontroller" superClass="com.atollic.truestudio.toolchain_options.mcu" value="STM32F103VC" valueType="string"/>
 							<option id="com.atollic.truestudio.toolchain_options.vendor.2046816417" name="Vendor name" superClass="com.atollic.truestudio.toolchain_options.vendor" value="STMicroelectronics" valueType="string"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.debug.toolchain.platform.337226003" isAbstract="false" name="Debug platform" osList="all" superClass="com.atollic.truestudio.exe.debug.toolchain.platform"/>
-							<builder buildPath="${workspace_loc:/W6100S_DMA}/Debug" customBuilderProperties="toolChainpathString=D:\\Atollic\\TrueSTUDIO for STM32 9.1.0\\ARMTools\\bin|toolChainpathType=1|com.atollic.truestudio.common_options.target.vendor=STMicroelectronics|com.atollic.truestudio.common_options.target.mcu=STM32F103VC|" id="com.atollic.truestudio.mbs.builder1.621903315" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
+							<builder buildPath="${workspace_loc:/W6100S_DMA}/Debug" customBuilderProperties="toolChainpathString=D:\\Tool\\TrueSTUDIO for STM32 9.2.0\\TrueSTUDIO for STM32 9.3.0\\ARMTools\\bin|toolChainpathType=1|com.atollic.truestudio.common_options.target.vendor=STMicroelectronics|com.atollic.truestudio.common_options.target.mcu=STM32F103VC|" id="com.atollic.truestudio.mbs.builder1.621903315" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.as.1432099198" name="Assembler" superClass="com.atollic.truestudio.exe.debug.toolchain.as">
 								<option id="com.atollic.truestudio.common_options.target.endianess.762783015" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.2014953590" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F103VC" valueType="enumerated"/>
@@ -116,7 +116,7 @@
 							<tool id="com.atollic.truestudio.ar.base.830521598" name="Archiver" superClass="com.atollic.truestudio.ar.base"/>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.secoutput.942411399" name="Other" superClass="com.atollic.truestudio.exe.debug.toolchain.secoutput">
 								<option id="com.atollic.truestudio.secoutput.general.convert.1512887482" name="Convert build output" superClass="com.atollic.truestudio.secoutput.general.convert" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-								<option id="com.atollic.truestudio.mbs.convert.1725957394" name="Format" superClass="com.atollic.truestudio.mbs.convert" useByScannerDiscovery="false" value="com.atollic.truestudio.mbs.convert.bin" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.mbs.convert.1725957394" name="Format" superClass="com.atollic.truestudio.mbs.convert" useByScannerDiscovery="false" value="com.atollic.truestudio.mbs.convert.hex" valueType="enumerated"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
