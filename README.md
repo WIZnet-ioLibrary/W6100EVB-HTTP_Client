@@ -39,9 +39,7 @@ This project requires an environment that runs DHCP and DNS.
   - Power On and push Reset button to start Program<br>
   - Program Run Serial display <br>
   <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/34225062/56117492-21a0b900-5fa3-11e9-8a75-2e51866ded9c.png" />    
-  </p>
-  <p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/34225062/56117492-21a0b900-5fa3-11e9-8a75-2e51866ded9c.png" />      
     <img width="60%" src="https://user-images.githubusercontent.com/34225062/56117531-3b420080-5fa3-11e9-83d3-175b29b9c18d.png" />    
   </p>
   
