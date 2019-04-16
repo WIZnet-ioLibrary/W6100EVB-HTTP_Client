@@ -39,8 +39,8 @@ This project requires an environment that runs DHCP and DNS.
   - Power On and push Reset button to start Program<br>
   - Program Run Serial display <br>
   <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/34225062/56117492-21a0b900-5fa3-11e9-8a75-2e51866ded9c.png" />      
-    <img width="60%" src="https://user-images.githubusercontent.com/34225062/56117531-3b420080-5fa3-11e9-83d3-175b29b9c18d.png" />    
+    <img width="60%" src="https://user-images.githubusercontent.com/34225062/56174744-f06dca80-602e-11e9-931c-c2dd459e16a1.png" />      
+    <img width="60%" src="https://user-images.githubusercontent.com/34225062/56174745-f1066100-602e-11e9-9f1a-9cd9f0febdc7.png" />    
   </p>
   
   - If you want to work over IP version 6, set the ip_ver value which is in main.c from AS_IPV4 to AS_IPV6.
