@@ -55,5 +55,5 @@ This project requires an environment that runs DHCP and DNS.
   </p>
 
    ## Test packet capture file
-    -Test packet capture file :  [HTTP_Client_Packet.zip](https://github.com/WIZnet-ioLibrary/W6100EVB-HTTP_Client/files/3071859/http_client_packet.zip)
+    -Test packet capture file :  [HTTP_Client_Packet.zip](https://github.com) will be update, if DHCP is OK
 
