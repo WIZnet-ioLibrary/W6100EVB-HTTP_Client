@@ -29,17 +29,8 @@ typedef enum
 } OnOff_State_Type;
 uint8_t flag_process_dhcp_success = OFF;
 uint8_t flag_process_dns_success = OFF;
-uint8_t dns_server[4] = {8, 8, 8, 8};           // Secondary DNS server IP
-//uint8_t dns_server[4] = {168, 126, 63, 1};           // Secondary DNS server IP
-uint8_t dns_server_ip6[16] = {0x20,0x01,0x48,0x60,
-								0x48,0x60,0x00,0x00,
-								0x00,0x00,0x00,0x00,
-								0x00,0x00,0x88,0x88
-							 };
 
 //for http client
-//#define HTTP_GET_TEST
-#define HTTP_POST_TEST
 // Example domain name
 uint8_t Domain_IP[16]  = {0,};                  // Translated IP address by DNS Server
 uint8_t Domain_name[] = "httpbin.org";
@@ -66,52 +57,37 @@ uint8_t con_ver = AS_IPV4;
 
 wiz_NetInfo	WIZCHIP_NetInfo	={
 					{0x00, 0x08, 0xdc, 0x57, 0x57, 0x63},//mac
-					{192, 168, 127, 103},			// <-need user ip
+					{192, 168, 100, 27},			// <-need user ip
 					{255, 255, 255, 0},				// <-need user subnet mask
-					{192,168,127,254},				// <-need user gate way
-					{0xfe,0x80, 0x00,0x00,
+					{192,168,100,1},				// <-need user gate way
+					{0x00,0x00, 0x00,0x00,
 					 0x00,0x00, 0x00,0x00,
-					 0x02,0x08, 0xdc,0xff,
-					 0xfe,0x57, 0x57, 0xab},	//lla
-					{0x20,0x01,0x02,0xb8,
-					 0x00,0x10,0x00,0x01,
-					 0x02,0x08, 0xdc,0xff,
-					 0xfe,0x57, 0x57, 0x67},	//gua
+					 0x00,0x00, 0x00,0x00,
+					 0x00,0x00, 0x00, 0x00},	// <-need user lla
+					{0x00,0x00,0x00,0x00,
+					 0x00,0x00,0x00,0x00,
+					 0x00,0x00, 0x00,0x00,
+					 0x00,0x00, 0x00, 0x00},	// <-need user gua
 					{0xff,0xff,0xff,0xff,
 					0xff,0xff,0xff,0xff,
 					0x00,0x00,0x00, 0x00,
-					0x00,0x00,0x00,0x00},		//sn6
-					{0xfe, 0x80, 0x00,0x00,
+					0x00,0x00,0x00,0x00},		// <-need user prefix
+					{0x00, 0x00, 0x00,0x00,
 					0x00,0x00,0x00,0x00,
-					0x02,0x00, 0x87,0xff,
-					0xfe,0x08, 0x4c,0x81},		//gw6
-					{0x0,},//dns
-					{0x0,},//dns6
+					0x00,0x00, 0x00,0x00,
+					0x00,0x00, 0x00,0x00},		// <-need user gate way 6
+
+
+//					{0x8,0x8,0x8,0x8},			//google dns
+					{168, 126, 63, 1},			//kt dns
+					{0x20,0x01,0x48,0x60,
+					 0x48,0x60,0x00,0x00,
+					 0x00,0x00,0x00,0x00,
+					 0x00,0x00,0x88,0x88},							//google dns6
+
 					NETINFO_STATIC_V4,				//ipmode
 };
 uint16_t WIZCHIP_PORT = 5000;
-
-wiz_NetInfo	Destination_NetInfo	={
-					{0xF4, 0x4D, 0x30, 0xAC, 0xB6, 0x1C},//mac
-					{192, 168, 0, 219},			//ip
-					{0x0,},				//sn
-					{0x0,},					//gw
-					{0xfe,0x80, 0x00,0x00,
-					0x00,0x00, 0x00,0x00,
-					0x18,0x15, 0x27,0xd3,
-					0x1c,0xa5, 0xe9, 0x0e},	//lla
-					{0x20, 0x01, 0x02, 0xb8,
-                    0x00, 0x10, 0xff, 0xfe,
-                    0x18, 0x15, 0x27, 0xd3,
-                    0x1c, 0xa5, 0xe9, 0x0e},	//gua
-					{0x0,},		//sn6
-					{0x0,},		//gw6
-					{0x0,},//dns
-					{0x0,},//dns6
-					NETINFO_STATIC_V4,				//ipmode
-};
-
-
 
 #define ETH_MAX_BUF_SIZE	2048
 uint8_t data_buf [ETH_MAX_BUF_SIZE]; // TX Buffer for applications
@@ -164,6 +140,7 @@ int main(void)
 	resetDeassert();
 	delay(10);
 
+
 	W6100Initialze();
 	ctlwizchip(CW_SYS_UNLOCK,& syslock);
 
@@ -209,7 +186,7 @@ int main(void)
 		if (ip_ver == AS_IPV4) printf(" # DNS: %s => %d.%d.%d.%d\r\n", Domain_name, Domain_IP[0], Domain_IP[1], Domain_IP[2], Domain_IP[3]);
 		else
 		{
-			printf(" # DNS: %s => %.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X\r\n", Domain_name, Domain_IP[0], Domain_IP[1], Domain_IP[2], Domain_IP[3],
+			printf(" # DNS: %s => %.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X:%.2X%.2X\r\n", Domain_name6, Domain_IP[0], Domain_IP[1], Domain_IP[2], Domain_IP[3],
 																														 Domain_IP[4], Domain_IP[5], Domain_IP[6], Domain_IP[7],
 																														 Domain_IP[8], Domain_IP[9], Domain_IP[10], Domain_IP[11],
 																														 Domain_IP[12], Domain_IP[13], Domain_IP[14], Domain_IP[15]);
@@ -221,125 +198,115 @@ int main(void)
 	}
 #endif
 
+	if (ip_ver == AS_IPV4)	httpc_init(0, Domain_IP, 80, g_send_buf, g_recv_buf);
+	else httpc_init(0, Domain_IP, 80, g_send_buf, g_recv_buf);
+	state_cnt=0;
 
-//	while(1)
-//	{
-		if (ip_ver == AS_IPV4)	httpc_init(0, Domain_IP, 80, g_send_buf, g_recv_buf);
-		else httpc_init(0, Domain_IP, 80, g_send_buf, g_recv_buf);
-		state_cnt=0;
+	while(1)
+	{
+		////////////////////////////////////////////
+		// HTTP socket process handler
+		////////////////////////////////////////////
+		if(ip_ver == AS_IPV4) httpc_connection_handler(4);
+		else httpc_connection_handler(16);
 
-		while(1)
+		if(httpc_isSockOpen)
 		{
-			////////////////////////////////////////////
-			// HTTP socket process handler
-			////////////////////////////////////////////
-			if(ip_ver == AS_IPV4) httpc_connection_handler(4);
-			else httpc_connection_handler(16);
+			if (ip_ver == AS_IPV4)	httpc_connect(4);
+			else httpc_connect(16);
+		}
 
-			if(httpc_isSockOpen)
+		// HTTP client example
+		if(httpc_isConnected)
+		{
+			if(!flag_sent_http_request)
 			{
-				if (ip_ver == AS_IPV4)	httpc_connect(4);
-				else httpc_connect(16);
-			}
-
-			// HTTP client example
-			if(httpc_isConnected)
-			{
-				if(!flag_sent_http_request)
+				if (ip_ver == AS_IPV4)
 				{
-					if (ip_ver == AS_IPV4)
+					if (state_cnt==0)
 					{
-						if (state_cnt==0)
-						{
-							// Send: HTTP request
-							request.method = (uint8_t *)HTTP_GET;
-							request.uri = (uint8_t *)URI_GET;
-							request.host = (uint8_t *)Domain_name;
+						// Send: HTTP request
+						request.method = (uint8_t *)HTTP_GET;
+						request.uri = (uint8_t *)URI_GET;
+						request.host = (uint8_t *)Domain_name;
 
-							// HTTP client example #1: Function for send HTTP request (header and body fields are integrated)
-							{
-								httpc_send(&request, g_recv_buf, g_send_buf, 0);
-							}
-						}
-						if (state_cnt==1)
+						// HTTP client example #1: Function for send HTTP request (header and body fields are integrated)
 						{
-							request.method = (uint8_t *)HTTP_POST;
-							request.uri = (uint8_t *)URI_POST;
-							request.host = (uint8_t *)Domain_name;
-							request.content_type =  (uint8_t *)"application/x-www-form-urlencoded";
-							request.content_length = 27;
-							//*g_send_buf = *body_data;
-							// HTTP client example #1: Function for send HTTP request (header and body fields are integrated)
-							{
-								httpc_send(&request, g_recv_buf, body_data, request.content_length);
-							}
-						}
-						// HTTP client example #2: Separate functions for HTTP request - default header + body
-						{
-	//						httpc_send_header(&request, g_recv_buf, NULL, len);
-	//						httpc_send_body(g_send_buf, len); // Send HTTP request message body
-						}
-
-						// HTTP client example #3: Separate functions for HTTP request with custom header fields - default header + custom header + body
-						{
-							//httpc_add_customHeader_field(tmpbuf, "Custom-Auth", "auth_method_string"); // custom header field extended - example #1
-							//httpc_add_customHeader_field(tmpbuf, "Key", "auth_key_string"); // custom header field extended - example #2
-							//httpc_send_header(&request, g_recv_buf, tmpbuf, len);
-							//httpc_send_body(g_send_buf, len);
+							httpc_send(&request, g_recv_buf, g_send_buf, 0);
 						}
 					}
-					if(ip_ver == AS_IPV6)
+					if (state_cnt==1)
 					{
-						if (state_cnt==0)
+						request.method = (uint8_t *)HTTP_POST;
+						request.uri = (uint8_t *)URI_POST;
+						request.host = (uint8_t *)Domain_name;
+						request.content_type =  (uint8_t *)"application/x-www-form-urlencoded";
+						request.content_length = 27;
+						// HTTP client example #1: Function for send HTTP request (header and body fields are integrated)
 						{
-							// Send: HTTP request
-							request.method = (uint8_t *)HTTP_GET;
-							request.uri = (uint8_t *)URI;
-							request.host = (uint8_t *)Domain_name6;
-
-							// HTTP client example #1: Function for send HTTP request (header and body fields are integrated)
-							{
-								httpc_send(&request, g_recv_buf, g_send_buf, 0);
-							}
+							httpc_send(&request, g_recv_buf, body_data, request.content_length);
 						}
 					}
-
-					flag_sent_http_request = ENABLE;
-				}
-
-				// Recv: HTTP response
-				if(httpc_isReceived > 0)
-				{
-					printf("httpc_isReceived: %d\r\n",httpc_isReceived);
-					len = httpc_recv(g_recv_buf, httpc_isReceived);
-					//len = recv(0, g_recv_buf, httpc_isReceived);
-
-					printf(" >> HTTP Response - Received len: %d\r\n", len);
-					printf("======================================================\r\n");
-
-					//printf("%d \r\n", len);
-					for(i = 0; i < len; i++) {
-						//printf("%d ", i);
-						printf("%c", g_recv_buf[i]);
+					// HTTP client example #2: Separate functions for HTTP request - default header + body
+					{
+//						httpc_send_header(&request, g_recv_buf, NULL, len);
+//						httpc_send_body(g_send_buf, len); // Send HTTP request message body
 					}
 
-					printf("\r\n");
-					printf("======================================================\r\n");
-					delay(2);
-					getsockopt(0,SO_RECVBUF,&len);
-					if (!len)
+					// HTTP client example #3: Separate functions for HTTP request with custom header fields - default header + custom header + body
 					{
-						flag_sent_http_request = DISABLE;
-						state_cnt++;
+						//httpc_add_customHeader_field(tmpbuf, "Custom-Auth", "auth_method_string"); // custom header field extended - example #1
+						//httpc_add_customHeader_field(tmpbuf, "Key", "auth_key_string"); // custom header field extended - example #2
+						//httpc_send_header(&request, g_recv_buf, tmpbuf, len);
+						//httpc_send_body(g_send_buf, len);
 					}
 				}
+				if(ip_ver == AS_IPV6)
+				{
+					if (state_cnt==0)
+					{
+						// Send: HTTP request
+						request.method = (uint8_t *)HTTP_GET;
+						request.uri = (uint8_t *)URI;
+						request.host = (uint8_t *)Domain_name6;
+
+						// HTTP client example #1: Function for send HTTP request (header and body fields are integrated)
+						{
+							httpc_send(&request, g_recv_buf, g_send_buf, 0);
+						}
+					}
+				}
+
+				flag_sent_http_request = ENABLE;
 			}
+
+			// Recv: HTTP response
+			if(httpc_isReceived > 0)
+			{
+				printf("httpc_isReceived: %d\r\n",httpc_isReceived);
+				len = httpc_recv(g_recv_buf, httpc_isReceived);
+
+				printf(" >> HTTP Response - Received len: %d\r\n", len);
+				printf("======================================================\r\n");
+				for(i = 0; i < len; i++) {
+					printf("%c", g_recv_buf[i]);
+				}
+				printf("\r\n");
+				printf("======================================================\r\n");
+				delay(2);
+				getsockopt(0,SO_RECVBUF,&len);
+				if (!len)
+				{
+					flag_sent_http_request = DISABLE;
+					state_cnt++;
+				}
+			}
+		}
 
 #ifdef __USE_DHCP__
-			DHCP_run(); // DHCP renew
+		DHCP_run(); // DHCP renew
 #endif
-		}
-//	}
+	}
 }
 
 void delay(unsigned int count)
@@ -456,7 +423,7 @@ int8_t process_dns(void)
     	if(ip_ver == AS_IPV4)
     	{
     		IP_TYPE = 0x01;
-			if((ret = DNS_run(SOCK_DNS,dns_server, (uint8_t *)Domain_name, Domain_IP,AS_IPV4)) == 1)
+			if((ret = DNS_run(SOCK_DNS,WIZCHIP_NetInfo.dns, (uint8_t *)Domain_name, Domain_IP,AS_IPV4)) == 1)
 			{
 #ifdef _MAIN_DEBUG_
 				printf(" - DNS Success\r\n");
@@ -474,10 +441,10 @@ int8_t process_dns(void)
     	else
     	{
     		IP_TYPE = 0x1c;
-			if((ret = DNS_run(SOCK_DNS,dns_server_ip6, (uint8_t *)Domain_name6, Domain_IP,AS_IPV6)) == 1)
+			if((ret = DNS_run(SOCK_DNS,WIZCHIP_NetInfo.dns6, (uint8_t *)Domain_name6, Domain_IP,AS_IPV6)) == 1)
 			{
 #ifdef _MAIN_DEBUG_
-				printf(" - DNS Success\r\n");
+				printf(" - DNS6 Success\r\n");
 #endif
 				break;
 			}
